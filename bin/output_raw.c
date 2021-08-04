@@ -463,13 +463,15 @@ extension_map_t	*extension_map = r->map_ref;
 				double duration = r->last - r->first;
 				duration += ((double)r->msec_last - (double)r->msec_first) / 1000.0;
 
+				//printf("%.3f\n", duration);
+
 				snprintf(_s, slen-1,
 "  nat event    =             %5u: %s\n"
-"  duration     =			  %.3f"		
+"  duration     =			  %.3f\n"		
 "  ingress VRF  =        %10u\n"
 "  egress VRF   =        %10u\n"
 , r->event, r->event_flag == FW_EVENT ? FwEventString(r->event) : EventString(r->event)
-, r->duration ,  r->ingress_vrfid, r->egress_vrfid);
+, duration,  r->ingress_vrfid, r->egress_vrfid);
 				_slen = strlen(data_string);
 				_s = data_string + _slen;
 				slen = STRINGSIZE - _slen;
