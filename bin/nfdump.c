@@ -179,7 +179,7 @@ extern exporter_t **exporter_list;
 
 #define FORMAT_nsel "%ts %evt %xevt %pr %sap -> %dap %xsap -> %xdap %ibyt %obyt"
 
-#define FORMAT_nel "%ts %nevt %pr %sap -> %dap %nsap -> %ndap"
+#define FORMAT_nel "%ts %td %nevt %pr %sap -> %dap %nsap -> %ndap"
 
 #ifdef NSEL
 #	define DefaultMode "nsel"
