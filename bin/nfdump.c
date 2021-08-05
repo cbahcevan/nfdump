@@ -177,7 +177,7 @@ extern exporter_t **exporter_list;
 
 #define FORMAT_bilong "%ts %td %pr %sap <-> %dap %flg %tos %opkt %ipkt %obyt %ibyt %fl"
 
-#define FORMAT_nsel "%ts %evt %xevt %pr %sap -> %dap %xsap -> %xdap %ibyt %obyt"
+#define FORMAT_nsel "%ts %td %evt %xevt %pr %sap -> %dap %xsap -> %xdap %ibyt %obyt"
 
 #define FORMAT_nel "%ts %td %nevt %pr %sap -> %dap %nsap -> %ndap"
 
