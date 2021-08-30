@@ -67,10 +67,40 @@ void raw_epilog(bool quiet) {
 	// empty
 } // End of raw_epilog
 
-void flow_record_to_raw(void *record, char ** s, int tag) {
-	FILE* testFile;
-	testFile = fopen("/home/cenkbahcevan/test.txt", mode = "w");
 
+void flow_record_to_csv_special_format(void* record, char** s, int tag) {
+
+	char* _s, as[IP_STRING_LEN], ds[IP_STRING_LEN], datestr1[64], datestr2[64], datestr3[64];
+	char		s_snet[IP_STRING_LEN], s_dnet[IP_STRING_LEN];
+	int			i, id;
+	ssize_t		slen, _slen;
+	time_t		when;
+	struct tm* ts;
+	master_record_t* r = (master_record_t*)record;
+	extension_map_t* extension_map = r->map_ref;
+
+
+	FILE* testFile;
+	testFile = fopen("/home/cenkbahcevan/test.txt", mode = "a");
+
+	fprintf(testFile, 
+		" %5u|"
+		"%10u [%s]|"
+		"%10u [%s]|"
+		"%5u|"
+		"%5u|"
+		"%16s|"
+		"%16s"
+		r->first,
+		datestr1, r->last, datestr2, r->msec_first, r->msec_last,
+		as, ds);
+
+	fclose(testFile);
+
+}
+
+void flow_record_to_raw(void *record, char ** s, int tag) {
+	
 char 		*_s, as[IP_STRING_LEN], ds[IP_STRING_LEN], datestr1[64], datestr2[64], datestr3[64];
 char		s_snet[IP_STRING_LEN], s_dnet[IP_STRING_LEN];
 int			i, id;
@@ -163,25 +193,7 @@ extension_map_t	*extension_map = r->map_ref;
 		as, ds );
 
 
-	fprintf(testFile, "\n"
-		"Flow Record: \n"
-		"  Flags        =              0x%.2x %s%s, %s\n"
-		"  label        =  %16s\n"
-		"  export sysid =             %5u\n"
-		"  size         =             %5u\n"
-		"  first        =        %10u [%s]\n"
-		"  last         =        %10u [%s]\n"
-		"  msec_first   =             %5u\n"
-		"  msec_last    =             %5u\n"
-		"  src addr     =  %16s\n"
-		"  dst addr     =  %16s\n"
-		,
-		r->flags, type, version,
-		TestFlag(r->flags, FLAG_SAMPLED) ? "Sampled" : "Unsampled",
-		r->label ? r->label : "<none>",
-		r->exporter_sysid, r->size, r->first,
-		datestr1, r->last, datestr2, r->msec_first, r->msec_last,
-		as, ds);
+
 
 	_slen = strlen(data_string);
 	_s = data_string + _slen;

@@ -285,7 +285,8 @@ uint32_t			cnt;
 
 		if ( extended ) {
 			char *string;
-			flow_record_to_raw(&record, &string, 0);
+			//flow_record_to_raw(&record, &string, 0);
+			flow_record_to_csv_special_format(&record, &string, 0);
 			fprintf(stderr, "%s\n", string);
 		} 
 
