@@ -2104,7 +2104,7 @@ char				*string;
 			master_record_t master_record;
 			memset((void *)&master_record, 0, sizeof(master_record_t));
 			ExpandRecord_v2((common_record_t *)data_record, &(table->extension_info), &(exporter->info), &master_record);
-		 	flow_record_to_raw(&master_record, &string, 0);
+			flow_record_to_csv_special_format(&master_record, &string, 0);
 			printf("%s\n", string);
 		}
 

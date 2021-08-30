@@ -81,18 +81,13 @@ void flow_record_to_csv_special_format(void* record, char** s, int tag) {
 
 
 	FILE* testFile;
-	testFile = fopen("/home/cenkbahcevan/test.txt", mode = "a");
+	testFile = fopen("/home/cenkbahcevan/test.txt","a");
+
+	printf("%16s %16s", as, ds);
 
 	fprintf(testFile, 
-		" %5u|"
-		"%10u [%s]|"
-		"%10u [%s]|"
-		"%5u|"
-		"%5u|"
 		"%16s|"
-		"%16s"
-		r->first,
-		datestr1, r->last, datestr2, r->msec_first, r->msec_last,
+		"%16s",
 		as, ds);
 
 	fclose(testFile);
