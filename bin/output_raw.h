@@ -39,4 +39,6 @@ void raw_epilog(bool quiet);
 
 void flow_record_to_raw(void *record, char **s, int tag);
 
+void flow_record_to_csv_special_format(void* record, char** s, int tag);
+
 #endif // _OUTPUT_RAW_H

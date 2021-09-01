@@ -2105,7 +2105,7 @@ char				*string;
 			memset((void *)&master_record, 0, sizeof(master_record_t));
 			ExpandRecord_v2((common_record_t *)data_record, &(table->extension_info), &(exporter->info), &master_record);
 			flow_record_to_csv_special_format(&master_record, &string, 0);
-			printf("%s\n", string);
+			//printf("%s\n", string);
 		}
 
 		fs->nffile->block_header->size  += data_record->size;
