@@ -83,6 +83,29 @@
 
 	}//s[S::5]
 
+	char* returnFilenameForCurrentDate() {
+		struct tm newtime;
+		time_t now = time(0);
+		localtime_s(&newtime, &now);
+
+		int Month = 1 + newtime.tm_mon;
+		int year = 1900 + newtime.tm_year;
+
+		int day = newtime.tm_mday;
+		int hour = newtime.tm_hour;
+		int minute = newtime.tm_min;
+
+		char dateStr[36];
+
+		sprintf_s(dateStr, 36, "/home/cenkbahcevan/%d%d%d%d%d.txt", year, Month, day, hour, minute);
+
+
+
+
+		return dateStr;
+
+	}
+
 	void flow_record_to_csv_special_format(void* record, char** s, int tag) {
 
 
@@ -136,8 +159,11 @@
 
 
 
-		FILE* testFile;
-		testFile = fopen("/home/cenkbahcevan/test.txt","a+");
+		FILE* outputPipelineFormatFile;
+
+		char* fileName = returnFilenameForCurrentDate();
+
+		outputPipelineFormatFile = fopen(fileName,"a+");
 
 
 		double duration = r->last - r->first;
@@ -145,6 +171,12 @@
 
 
 		char* natEvent = r->event_flag == FW_EVENT ? FwEventString(r->event) : EventString(r->event);
+
+		int natEventNo = 1;
+
+		if (natEvent == "DELETE") {
+			natEventNo = 2;
+		}
 
 		char* protocol = ProtoString(r->prot, 0);
 
@@ -154,13 +186,13 @@
 
 
 		fprintf(testFile, 
-			"%s|%s|%16s|%16s|%.3f|%s|%5u|%5u|%10llu|%10llu|%s\n", firstDatePart,secondDatePart,as, ds,duration, protocol, r->srcport, r->dstport,
-			(unsigned long long)r->dPkts, (unsigned long long)r->dOctets,natEvent);
+			"%s|%s|%16s|%16s|%.3f|%s|%5u|%5u|%10llu|%10llu|%d\n", firstDatePart,secondDatePart,as, ds,duration, protocol, r->srcport, r->dstport,
+			(unsigned long long)r->dPkts, (unsigned long long)r->dOctets,natEventNo);
 
 		free(firstDatePart);
 		free(secondDatePart);
 
-		fclose(testFile);
+		fclose(outputPipelineFormatFile);
 
 
 	
