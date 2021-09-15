@@ -185,7 +185,7 @@
 		char* secondDatePart = subStrTextCustomize(datestr1, 11, 19);
 
 
-		fprintf(testFile, 
+		fprintf(outputPipelineFormatFile,
 			"%s|%s|%16s|%16s|%.3f|%s|%5u|%5u|%10llu|%10llu|%d\n", firstDatePart,secondDatePart,as, ds,duration, protocol, r->srcport, r->dstport,
 			(unsigned long long)r->dPkts, (unsigned long long)r->dOctets,natEventNo);
 
